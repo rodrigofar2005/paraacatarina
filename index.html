@@ -188,20 +188,6 @@ body {
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
-
-#contador {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(255,255,255,0.8);
-    color: #ff1493;
-    padding: 10px 18px;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    z-index: 20;
-}
 </style>
 </head>
 
@@ -244,8 +230,6 @@ body {
     <div>Amo-te muito 💖</div>
 </div>
 
-<div id="contador">O meu amor por ti começou há: 0 dias 0h 0m 0s</div>
-
 <script>
 function abrirCarta() {
     document.getElementById("letter").style.display = "block";
@@ -255,41 +239,10 @@ function clicouSim() {
     document.getElementById("yesScreen").style.display = "flex";
 }
 
-// Botão "NÃO" foge
 const noBtn = document.getElementById("noBtn");
-function fugir() {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 120 - 60;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-}
-noBtn.addEventListener("mouseenter", fugir);
-noBtn.addEventListener("touchstart", fugir);
-
-// Contador dinâmico
-const contador = document.getElementById("contador");
-const inicio = new Date("2022-08-16T00:00:00");
-
-function atualizarContador() {
-    const agora = new Date();
-    let diff = agora - inicio;
-
-    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= dias * (1000 * 60 * 60 * 24);
-
-    const horas = Math.floor(diff / (1000 * 60 * 60));
-    diff -= horas * (1000 * 60 * 60);
-
-    const minutos = Math.floor(diff / (1000 * 60));
-    diff -= minutos * (1000 * 60);
-
-    const segundos = Math.floor(diff / 1000);
-
-    contador.textContent = `O meu amor por ti começou há: ${dias} dias ${horas}h ${minutos}m ${segundos}s`;
-}
-
-// Atualiza a cada segundo
-setInterval(atualizarContador, 1000);
-atualizarContador();
+noBtn.addEventListener("mouseenter", () => {
+    noBtn.style.transform = `translate(${Math.random()*200-100}px,${Math.random()*100-50}px)`;
+});
 </script>
 
 </body>
