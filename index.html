@@ -56,14 +56,14 @@ body {
     animation: balancar 4s ease-in-out infinite alternate;
 }
 
-.foto.f1 { left: 10%; transform: rotate(-5deg); }
-.foto.f2 { left: 28%; transform: rotate(4deg); }
-.foto.f3 { left: 46%; transform: rotate(-3deg); }
-.foto.f4 { left: 64%; transform: rotate(5deg); }
-.foto.f5 { left: 14%; transform: rotate(3deg); }
-.foto.f6 { left: 34%; transform: rotate(-4deg); }
-.foto.f7 { left: 56%; transform: rotate(2deg); }
-.foto.f8 { left: 76%; transform: rotate(-5deg); }
+.foto.f1 { left: 10%; }
+.foto.f2 { left: 28%; }
+.foto.f3 { left: 46%; }
+.foto.f4 { left: 64%; }
+.foto.f5 { left: 14%; }
+.foto.f6 { left: 34%; }
+.foto.f7 { left: 56%; }
+.foto.f8 { left: 76%; }
 
 .foto::before {
     content: "";
@@ -86,12 +86,11 @@ body {
     background: linear-gradient(#caa472, #8b5a2b);
     border-radius: 3px;
     transform: translateX(-50%);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
 
 @keyframes balancar {
-    from { transform: rotate(var(--r1, -2deg)); }
-    to { transform: rotate(var(--r2, 2deg)); }
+    from { transform: rotate(-3deg); }
+    to { transform: rotate(3deg); }
 }
 
 .container {
@@ -188,11 +187,12 @@ body {
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
+
 #contador {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.85);
     color: #ff1493;
     padding: 10px 18px;
     border-radius: 12px;
@@ -243,6 +243,9 @@ body {
     <div>Fizeste-me a pessoa mais feliz do mundo, Amo-te muito 💖</div>
 </div>
 
+<!-- ✅ CONTADOR -->
+<div id="contador"></div>
+
 <script>
 function abrirCarta() {
     document.getElementById("letter").style.display = "block";
@@ -254,9 +257,10 @@ function clicouSim() {
 
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseenter", () => {
-    noBtn.style.transform = `translate(${Math.random()*200-100}px,${Math.random()*100-50}px)`;
-}
-);
+    noBtn.style.transform =
+        `translate(${Math.random()*200-100}px,${Math.random()*100-50}px)`;
+});
+
 const contador = document.getElementById("contador");
 const inicio = new Date("2022-08-16T00:00:00");
 
@@ -264,24 +268,24 @@ function atualizarContador() {
     const agora = new Date();
     let diff = agora - inicio;
 
-    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= dias * (1000 * 60 * 60 * 24);
+    const dias = Math.floor(diff / (1000*60*60*24));
+    diff -= dias * (1000*60*60*24);
 
-    const horas = Math.floor(diff / (1000 * 60 * 60));
-    diff -= horas * (1000 * 60 * 60);
+    const horas = Math.floor(diff / (1000*60*60));
+    diff -= horas * (1000*60*60);
 
-    const minutos = Math.floor(diff / (1000 * 60));
-    diff -= minutos * (1000 * 60);
+    const minutos = Math.floor(diff / (1000*60));
+    diff -= minutos * (1000*60);
 
     const segundos = Math.floor(diff / 1000);
 
-    contador.textContent = `O meu amor por ti começou há: ${dias} dias ${horas}h ${minutos}m ${segundos}s`;
+    contador.textContent =
+        `O meu amor por ti começou há: ${dias} dias ${horas}h ${minutos}m ${segundos}s`;
 }
+
 setInterval(atualizarContador, 1000);
 atualizarContador();
 </script>
 
 </body>
 </html>
-
-
