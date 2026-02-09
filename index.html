@@ -14,63 +14,86 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* ===== ESTENDAIS ===== */
 .estendal {
     position: fixed;
     width: 100%;
     left: 0;
-    display: flex;
-    justify-content: center;
-    gap: 16px;
+    height: 180px;
     z-index: 1;
+    pointer-events: none;
 }
 
-.estendal.top {
-    top: 14%;
-}
-
-.estendal.bottom {
-    bottom: 14%;
-}
+.estendal.top { top: 8%; }
+.estendal.bottom { bottom: 8%; }
 
 .fio {
     position: absolute;
-    top: 36px;
-    width: 100%;
-    height: 2px;
-    background: #8b5a2b;
+    top: 60px;
+    left: -5%;
+    width: 110%;
+    height: 8px;
+    background: repeating-linear-gradient(
+        45deg,
+        #8b5a2b,
+        #8b5a2b 6px,
+        #7a4a22 6px,
+        #7a4a22 12px
+    );
+    border-radius: 50%;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4);
 }
 
 .foto {
-    width: 65px;
-    height: 85px;
+    position: absolute;
+    top: 80px;
+    width: 95px;
+    height: 120px;
     background-size: cover;
     background-position: center;
-    border: 3px solid white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    position: relative;
-    animation: balancar 3s ease-in-out infinite alternate;
+    border: 4px solid white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+    transform-origin: top center;
+    animation: balancar 4s ease-in-out infinite alternate;
 }
 
-.foto:nth-child(odd) {
-    animation-duration: 3.5s;
-}
+.foto.f1 { left: 10%; transform: rotate(-5deg); }
+.foto.f2 { left: 28%; transform: rotate(4deg); }
+.foto.f3 { left: 46%; transform: rotate(-3deg); }
+.foto.f4 { left: 64%; transform: rotate(5deg); }
+.foto.f5 { left: 14%; transform: rotate(3deg); }
+.foto.f6 { left: 34%; transform: rotate(-4deg); }
+.foto.f7 { left: 56%; transform: rotate(2deg); }
+.foto.f8 { left: 76%; transform: rotate(-5deg); }
 
 .foto::before {
-    content: "📎";
+    content: "";
     position: absolute;
     top: -22px;
     left: 50%;
+    width: 3px;
+    height: 22px;
+    background: #6b3f1d;
     transform: translateX(-50%);
-    font-size: 20px;
+}
+
+.foto::after {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    width: 18px;
+    height: 14px;
+    background: linear-gradient(#caa472, #8b5a2b);
+    border-radius: 3px;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
 
 @keyframes balancar {
-    from { transform: rotate(-2deg); }
-    to { transform: rotate(2deg); }
+    from { transform: rotate(var(--r1, -2deg)); }
+    to { transform: rotate(var(--r2, 2deg)); }
 }
 
-/* ===== CARTA ===== */
 .container {
     position: fixed;
     inset: 0;
@@ -139,18 +162,9 @@ body {
     cursor: pointer;
 }
 
-.yes {
-    background: #4caf50;
-    color: white;
-}
+.yes { background: #4caf50; color: white; }
+.no  { background: #f44336; color: white; }
 
-.no {
-    background: #f44336;
-    color: white;
-    position: relative;
-}
-
-/* ===== TELA SIM ===== */
 .yes-screen {
     position: fixed;
     inset: 0;
@@ -162,13 +176,11 @@ body {
     color: white;
     text-align: center;
     z-index: 10;
-    padding: 20px;
 }
 
 .big-heart {
     font-size: 90px;
     animation: pulse 1s infinite;
-    margin-bottom: 20px;
 }
 
 @keyframes pulse {
@@ -177,7 +189,6 @@ body {
     100% { transform: scale(1); }
 }
 
-/* ===== CONTADOR ===== */
 #contador {
     position: fixed;
     bottom: 20px;
@@ -196,29 +207,25 @@ body {
 
 <body>
 
-<!-- ESTENDAL SUPERIOR -->
 <div class="estendal top">
     <div class="fio"></div>
-    <div class="foto" style="background-image:url('foto1.jpg')"></div>
-    <div class="foto" style="background-image:url('foto2.jpg')"></div>
-    <div class="foto" style="background-image:url('foto3.jpg')"></div>
-    <div class="foto" style="background-image:url('foto4.jpg')"></div>
+    <div class="foto f1" style="background-image:url('foto1.jpeg')"></div>
+    <div class="foto f2" style="background-image:url('foto2.jpeg')"></div>
+    <div class="foto f3" style="background-image:url('foto3.jpeg')"></div>
+    <div class="foto f4" style="background-image:url('foto4.jpeg')"></div>
 </div>
 
-<!-- ESTENDAL INFERIOR -->
 <div class="estendal bottom">
     <div class="fio"></div>
-    <div class="foto" style="background-image:url('foto5.jpg')"></div>
-    <div class="foto" style="background-image:url('foto6.jpg')"></div>
-    <div class="foto" style="background-image:url('foto7.jpg')"></div>
-    <div class="foto" style="background-image:url('foto8.jpg')"></div>
+    <div class="foto f5" style="background-image:url('foto5.jpeg')"></div>
+    <div class="foto f6" style="background-image:url('foto6.jpeg')"></div>
+    <div class="foto f7" style="background-image:url('foto7.jpeg')"></div>
+    <div class="foto f8" style="background-image:url('foto8.jpeg')"></div>
 </div>
 
-<!-- CARTA -->
 <div class="container">
     <div class="envelope">
         <button class="open-btn" onclick="abrirCarta()">ABRIR</button>
-
         <div class="letter" id="letter">
             <div class="question">
                 Catarina… 💕<br>
@@ -234,10 +241,9 @@ body {
 
 <div class="yes-screen" id="yesScreen">
     <div class="big-heart">❤️</div>
-    <div>Fizeste-me a pessoa mais feliz do mundo, AMO-TE 💖</div>
+    <div>Amo-te muito 💖</div>
 </div>
 
-<!-- CONTADOR -->
 <div id="contador">O meu amor por ti começou há: 0 dias 0h 0m 0s</div>
 
 <script>
@@ -249,24 +255,23 @@ function clicouSim() {
     document.getElementById("yesScreen").style.display = "flex";
 }
 
+// Botão "NÃO" foge
 const noBtn = document.getElementById("noBtn");
-
 function fugir() {
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 120 - 60;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
-
 noBtn.addEventListener("mouseenter", fugir);
 noBtn.addEventListener("touchstart", fugir);
 
-/* ===== CONTADOR DINÂMICO ===== */
+// Contador dinâmico
 const contador = document.getElementById("contador");
-const inicio = new Date("2022-08-16T00:00:00"); // Data do início do namoro
+const inicio = new Date("2022-08-16T00:00:00");
 
 function atualizarContador() {
     const agora = new Date();
-    let diff = agora - inicio; // diferença em ms
+    let diff = agora - inicio;
 
     const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
     diff -= dias * (1000 * 60 * 60 * 24);
