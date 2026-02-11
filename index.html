@@ -55,6 +55,12 @@ body {
     box-shadow: 0 8px 16px rgba(0,0,0,0.35);
     transform-origin: top center;
     animation: balancar 4s ease-in-out infinite alternate;
+    transition: 0.4s;
+    pointer-events: auto;
+}
+
+.foto:hover {
+    transform: scale(1.05) rotate(1deg);
 }
 
 .foto.f1 { left: 10%; }
@@ -108,7 +114,8 @@ body {
     width: 90%;
     max-width: 340px;
     height: 230px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
     border-radius: 14px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.25);
     display: flex;
@@ -117,6 +124,7 @@ body {
     position: relative;
 }
 
+/* Botão ABRIR */
 .open-btn {
     padding: 14px 36px;
     font-size: 18px;
@@ -125,8 +133,15 @@ body {
     background: #ff4d6d;
     color: white;
     cursor: pointer;
+    transition: 0.3s;
 }
 
+.open-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(255,77,109,0.4);
+}
+
+/* Carta */
 .letter {
     position: absolute;
     inset: 15px;
@@ -178,6 +193,12 @@ body {
     color: white;
     text-align: center;
     z-index: 10;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .big-heart {
@@ -286,6 +307,13 @@ let heartsInterval;
 
 function clicouSim() {
     document.getElementById("yesScreen").style.display = "flex";
+
+    /* Explosão inicial 💥 */
+    for (let i = 0; i < 25; i++) {
+        setTimeout(criarCoracao, i * 80);
+    }
+
+    /* Corações contínuos */
     heartsInterval = setInterval(criarCoracao, 300);
 }
 
