@@ -14,14 +14,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Estendal */
+/* ESTENDAL */
 .estendal {
     position: fixed;
     width: 100%;
-    left: 0;
     height: 180px;
-    z-index: 1;
     pointer-events: none;
+    z-index: 1;
 }
 
 .estendal.top { top: 8%; }
@@ -32,75 +31,37 @@ body {
     top: 60px;
     left: -5%;
     width: 110%;
-    height: 8px;
-    background: repeating-linear-gradient(
-        45deg,
-        #8b5a2b,
-        #8b5a2b 6px,
-        #7a4a22 6px,
-        #7a4a22 12px
-    );
-    border-radius: 50%;
-    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4);
+    height: 6px;
+    background: #8b5a2b;
 }
 
 .foto {
     position: absolute;
-    top: 80px;
-    width: 95px;
-    height: 120px;
+    top: 70px;
+    width: 90px;
+    height: 110px;
     background-size: cover;
     background-position: center;
     border: 4px solid white;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.35);
-    transform-origin: top center;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.35);
     animation: balancar 4s ease-in-out infinite alternate;
-    transition: 0.4s;
-    pointer-events: auto;
-}
-
-.foto:hover {
-    transform: scale(1.05) rotate(1deg);
 }
 
 .foto.f1 { left: 10%; }
-.foto.f2 { left: 28%; }
-.foto.f3 { left: 46%; }
-.foto.f4 { left: 64%; }
-.foto.f5 { left: 14%; }
-.foto.f6 { left: 34%; }
-.foto.f7 { left: 56%; }
-.foto.f8 { left: 76%; }
-
-.foto::before {
-    content: "";
-    position: absolute;
-    top: -22px;
-    left: 50%;
-    width: 3px;
-    height: 22px;
-    background: #6b3f1d;
-    transform: translateX(-50%);
-}
-
-.foto::after {
-    content: "";
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    width: 18px;
-    height: 14px;
-    background: linear-gradient(#caa472, #8b5a2b);
-    border-radius: 3px;
-    transform: translateX(-50%);
-}
+.foto.f2 { left: 30%; }
+.foto.f3 { left: 50%; }
+.foto.f4 { left: 70%; }
+.foto.f5 { left: 15%; }
+.foto.f6 { left: 35%; }
+.foto.f7 { left: 55%; }
+.foto.f8 { left: 75%; }
 
 @keyframes balancar {
     from { transform: rotate(-3deg); }
     to { transform: rotate(3deg); }
 }
 
-/* Envelope */
+/* ENVELOPE */
 .container {
     position: fixed;
     inset: 0;
@@ -111,77 +72,87 @@ body {
 }
 
 .envelope {
-    width: 90%;
-    max-width: 340px;
-    height: 230px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(10px);
-    border-radius: 14px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
+    width: 320px;
+    height: 200px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    overflow: hidden;
 }
 
-/* Botão ABRIR */
+.flap {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background: #ff4d6d;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: 0.8s ease;
+    z-index: 3;
+}
+
+.letter {
+    position: absolute;
+    inset: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 20px;
+    text-align: center;
+    transform: translateY(120px);
+    transition: 0.8s ease;
+    z-index: 2;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+    transform: translateY(0);
+}
+
 .open-btn {
-    padding: 14px 36px;
-    font-size: 18px;
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 30px;
     border: none;
-    border-radius: 30px;
+    border-radius: 25px;
     background: #ff4d6d;
     color: white;
     cursor: pointer;
     transition: 0.3s;
+    z-index: 4;
 }
 
 .open-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 18px rgba(255,77,109,0.4);
+    transform: translateX(-50%) scale(1.08);
 }
 
-/* Carta */
-.letter {
-    position: absolute;
-    inset: 15px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    padding: 20px;
-    display: none;
-    animation: slideUp 0.8s forwards;
-    text-align: center;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.question {
-    font-size: 20px;
-    margin-bottom: 25px;
-}
-
+/* BOTÕES */
 .buttons {
+    margin-top: 15px;
     display: flex;
     justify-content: center;
-    gap: 18px;
+    gap: 15px;
 }
 
 .yes, .no {
-    padding: 14px 28px;
-    font-size: 17px;
+    padding: 10px 22px;
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
+    font-size: 15px;
 }
 
 .yes { background: #4caf50; color: white; }
 .no  { background: #f44336; color: white; }
 
-/* Tela SIM */
+/* TELA SIM */
 .yes-screen {
     position: fixed;
     inset: 0;
@@ -207,27 +178,23 @@ body {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
     50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
 }
 
-/* Contador */
+/* CONTADOR */
 #contador {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.9);
     color: #ff1493;
-    padding: 10px 18px;
+    padding: 10px 16px;
     border-radius: 12px;
     font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     z-index: 20;
 }
 
-/* Corações */
+/* CORAÇÕES */
 #hearts-container {
     position: fixed;
     inset: 0;
@@ -239,14 +206,9 @@ body {
     position: absolute;
     bottom: -20px;
     animation: floatUp linear forwards;
-    opacity: 0.8;
 }
 
 @keyframes floatUp {
-    from {
-        transform: translateY(0) scale(1);
-        opacity: 0.8;
-    }
     to {
         transform: translateY(-110vh) scale(1.4);
         opacity: 0;
@@ -259,6 +221,7 @@ body {
 
 <div id="hearts-container"></div>
 
+<!-- ESTENDAL -->
 <div class="estendal top">
     <div class="fio"></div>
     <div class="foto f1" style="background-image:url('foto1.jpeg')"></div>
@@ -275,10 +238,12 @@ body {
     <div class="foto f8" style="background-image:url('foto8.jpeg')"></div>
 </div>
 
+<!-- ENVELOPE -->
 <div class="container">
-    <div class="envelope">
-        <button class="open-btn" onclick="abrirCarta()">ABRIR</button>
-        <div class="letter" id="letter">
+    <div class="envelope" id="envelope">
+        <div class="flap"></div>
+
+        <div class="letter">
             <div class="question">
                 Catarina… 💕<br>
                 Queres ser a minha companhia do Dia dos Namorados?
@@ -288,42 +253,43 @@ body {
                 <button class="no" id="noBtn">NÃO</button>
             </div>
         </div>
+
+        <button class="open-btn" onclick="abrirEnvelope()">ABRIR</button>
     </div>
 </div>
 
+<!-- TELA SIM -->
 <div class="yes-screen" id="yesScreen">
     <div class="big-heart">❤️</div>
-    <div>Fizeste-me a pessoa mais feliz do mundo, Amo-te muito 💖</div>
+    <div>Fizeste-me a pessoa mais feliz do mundo 💖</div>
 </div>
 
+<!-- CONTADOR -->
 <div id="contador"></div>
 
 <script>
-function abrirCarta() {
-    document.getElementById("letter").style.display = "block";
+function abrirEnvelope() {
+    document.getElementById("envelope").classList.add("open");
 }
-
-let heartsInterval;
 
 function clicouSim() {
     document.getElementById("yesScreen").style.display = "flex";
 
-    /* Explosão inicial 💥 */
     for (let i = 0; i < 25; i++) {
         setTimeout(criarCoracao, i * 80);
     }
 
-    /* Corações contínuos */
-    heartsInterval = setInterval(criarCoracao, 300);
+    setInterval(criarCoracao, 300);
 }
 
+/* NÃO foge 😆 */
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseenter", () => {
     noBtn.style.transform =
-        `translate(${Math.random()*200-100}px,${Math.random()*100-50}px)`;
+        `translate(${Math.random()*150-75}px,${Math.random()*80-40}px)`;
 });
 
-/* Contador */
+/* CONTADOR */
 const contador = document.getElementById("contador");
 const inicio = new Date("2022-08-16T00:00:00");
 
@@ -349,7 +315,7 @@ function atualizarContador() {
 setInterval(atualizarContador, 1000);
 atualizarContador();
 
-/* Corações */
+/* CORAÇÕES */
 const heartsContainer = document.getElementById("hearts-container");
 
 function criarCoracao() {
@@ -362,7 +328,6 @@ function criarCoracao() {
     heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
 
     heartsContainer.appendChild(heart);
-
     setTimeout(() => heart.remove(), 7000);
 }
 </script>
