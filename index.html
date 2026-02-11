@@ -14,6 +14,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* Estendal */
 .estendal {
     position: fixed;
     width: 100%;
@@ -93,6 +94,7 @@ body {
     to { transform: rotate(3deg); }
 }
 
+/* Envelope */
 .container {
     position: fixed;
     inset: 0;
@@ -164,6 +166,7 @@ body {
 .yes { background: #4caf50; color: white; }
 .no  { background: #f44336; color: white; }
 
+/* Tela SIM */
 .yes-screen {
     position: fixed;
     inset: 0;
@@ -188,6 +191,7 @@ body {
     100% { transform: scale(1); }
 }
 
+/* Contador */
 #contador {
     position: fixed;
     bottom: 20px;
@@ -201,10 +205,38 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     z-index: 20;
 }
+
+/* Corações */
+#hearts-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.heart {
+    position: absolute;
+    bottom: -20px;
+    animation: floatUp linear forwards;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    to {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+    }
+}
 </style>
 </head>
 
 <body>
+
+<div id="hearts-container"></div>
 
 <div class="estendal top">
     <div class="fio"></div>
@@ -243,7 +275,6 @@ body {
     <div>Fizeste-me a pessoa mais feliz do mundo, Amo-te muito 💖</div>
 </div>
 
-<!-- ✅ CONTADOR -->
 <div id="contador"></div>
 
 <script>
@@ -251,8 +282,11 @@ function abrirCarta() {
     document.getElementById("letter").style.display = "block";
 }
 
+let heartsInterval;
+
 function clicouSim() {
     document.getElementById("yesScreen").style.display = "flex";
+    heartsInterval = setInterval(criarCoracao, 300);
 }
 
 const noBtn = document.getElementById("noBtn");
@@ -261,6 +295,7 @@ noBtn.addEventListener("mouseenter", () => {
         `translate(${Math.random()*200-100}px,${Math.random()*100-50}px)`;
 });
 
+/* Contador */
 const contador = document.getElementById("contador");
 const inicio = new Date("2022-08-16T00:00:00");
 
@@ -285,6 +320,23 @@ function atualizarContador() {
 
 setInterval(atualizarContador, 1000);
 atualizarContador();
+
+/* Corações */
+const heartsContainer = document.getElementById("hearts-container");
+
+function criarCoracao() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.textContent = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 16) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+}
 </script>
 
 </body>
