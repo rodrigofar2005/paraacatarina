@@ -1,179 +1,291 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>Para Catarina 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para a Catarina 💖</title>
 
 <style>
 body {
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
-    background: #ffc0cb;
+    background: linear-gradient(#ffb6c1, #ffc0cb);
+    overflow: hidden;
     font-family: Arial, sans-serif;
 }
 
-/* Envelope */
-.envelope {
-    position: relative;
-    width: 420px;
-    height: 260px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    overflow: hidden;
-}
-
-/* Aba */
-.flap {
-    position: absolute;
-    top: 0;
-    left: 0;
+.estendal {
+    position: fixed;
     width: 100%;
-    height: 140px;
-    background: #ff4d6d;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    transform-origin: top;
-    transition: transform 0.8s ease;
-    z-index: 3;
+    left: 0;
+    height: 180px;
+    z-index: 1;
+    pointer-events: none;
 }
 
-/* Carta */
-.carta {
+.estendal.top { top: 8%; }
+.estendal.bottom { bottom: 8%; }
+
+.fio {
     position: absolute;
-    bottom: -40px;
+    top: 60px;
+    left: -5%;
+    width: 110%;
+    height: 8px;
+    background: repeating-linear-gradient(
+        45deg,
+        #8b5a2b,
+        #8b5a2b 6px,
+        #7a4a22 6px,
+        #7a4a22 12px
+    );
+    border-radius: 50%;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4);
+}
+
+.foto {
+    position: absolute;
+    top: 80px;
+    width: 95px;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border: 4px solid white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+    transform-origin: top center;
+    animation: balancar 4s ease-in-out infinite alternate;
+}
+
+.foto.f1 { left: 10%; }
+.foto.f2 { left: 28%; }
+.foto.f3 { left: 46%; }
+.foto.f4 { left: 64%; }
+.foto.f5 { left: 14%; }
+.foto.f6 { left: 34%; }
+.foto.f7 { left: 56%; }
+.foto.f8 { left: 76%; }
+
+.foto::before {
+    content: "";
+    position: absolute;
+    top: -22px;
     left: 50%;
+    width: 3px;
+    height: 22px;
+    background: #6b3f1d;
     transform: translateX(-50%);
-    width: 90%;
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
-    transition: transform 0.8s ease;
-    text-align: center;
-    z-index: 2;
 }
 
-.carta p {
-    margin: 0 0 15px;
+.foto::after {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    width: 18px;
+    height: 14px;
+    background: linear-gradient(#caa472, #8b5a2b);
+    border-radius: 3px;
+    transform: translateX(-50%);
 }
 
-/* Botões */
-.botoes {
+@keyframes balancar {
+    from { transform: rotate(-3deg); }
+    to { transform: rotate(3deg); }
+}
+
+.container {
+    position: fixed;
+    inset: 0;
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 10px;
+    align-items: center;
+    z-index: 5;
 }
 
-button {
+.envelope {
+    width: 90%;
+    max-width: 340px;
+    height: 230px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.open-btn {
+    padding: 14px 36px;
+    font-size: 18px;
     border: none;
-    padding: 10px 22px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.sim {
-    background: #4CAF50;
-    color: white;
-}
-
-.nao {
-    background: #f44336;
-    color: white;
-}
-
-.abrir {
+    border-radius: 30px;
     background: #ff4d6d;
     color: white;
+    cursor: pointer;
 }
 
-/* Hover bonito */
-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+.letter {
+    position: absolute;
+    inset: 15px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    padding: 20px;
+    display: none;
+    animation: slideUp 0.8s forwards;
+    text-align: center;
 }
 
-/* Estado aberto */
-.envelope.aberto .flap {
-    transform: rotateX(180deg);
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
-.envelope.aberto .carta {
-    transform: translateX(-50%) translateY(-120px);
+.question {
+    font-size: 20px;
+    margin-bottom: 25px;
 }
 
-/* 💖 Corações */
-.coracao {
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+.yes, .no {
+    padding: 14px 28px;
+    font-size: 17px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.yes { background: #4caf50; color: white; }
+.no  { background: #f44336; color: white; }
+
+.yes-screen {
     position: fixed;
-    color: #ff4d6d;
-    font-size: 22px;
-    animation: subir 2s linear forwards;
+    inset: 0;
+    background: linear-gradient(#ff69b4, #ffb6c1);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    z-index: 10;
 }
 
-@keyframes subir {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(-200px);
-        opacity: 0;
-    }
+.big-heart {
+    font-size: 90px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+#contador {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.85);
+    color: #ff1493;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 20;
 }
 </style>
 </head>
 
 <body>
 
-<div class="envelope">
-    <div class="flap"></div>
+<div class="estendal top">
+    <div class="fio"></div>
+    <div class="foto f1" style="background-image:url('foto1.jpeg')"></div>
+    <div class="foto f2" style="background-image:url('foto2.jpeg')"></div>
+    <div class="foto f3" style="background-image:url('foto3.jpeg')"></div>
+    <div class="foto f4" style="background-image:url('foto4.jpeg')"></div>
+</div>
 
-    <div class="carta">
-        <p>
-            Catarina... 💌<br>
-            Queres ser a minha companhia do<br>
-            Dia dos Namorados?
-        </p>
+<div class="estendal bottom">
+    <div class="fio"></div>
+    <div class="foto f5" style="background-image:url('foto5.jpeg')"></div>
+    <div class="foto f6" style="background-image:url('foto6.jpeg')"></div>
+    <div class="foto f7" style="background-image:url('foto7.jpeg')"></div>
+    <div class="foto f8" style="background-image:url('foto8.jpeg')"></div>
+</div>
 
-        <div class="botoes">
-            <button class="sim">SIM</button>
-            <button class="nao">NÃO</button>
+<div class="container">
+    <div class="envelope">
+        <button class="open-btn" onclick="abrirCarta()">ABRIR</button>
+        <div class="letter" id="letter">
+            <div class="question">
+                Catarina… 💕<br>
+                Queres ser a minha companhia do Dia dos Namorados?
+            </div>
+            <div class="buttons">
+                <button class="yes" onclick="clicouSim()">SIM</button>
+                <button class="no" id="noBtn">NÃO</button>
+            </div>
         </div>
-
-        <button class="abrir" onclick="abrirEnvelope()">ABRIR</button>
     </div>
 </div>
 
+<div class="yes-screen" id="yesScreen">
+    <div class="big-heart">❤️</div>
+    <div>Fizeste-me a pessoa mais feliz do mundo, Amo-te muito 💖</div>
+</div>
+
+<!-- ✅ CONTADOR -->
+<div id="contador"></div>
+
 <script>
-function abrirEnvelope() {
-    const envelope = document.querySelector(".envelope");
-    envelope.classList.add("aberto");
-
-    // 💖 efeito de corações
-    for (let i = 0; i < 25; i++) {
-        setTimeout(criarCoracao, i * 80);
-    }
+function abrirCarta() {
+    document.getElementById("letter").style.display = "block";
 }
 
-function criarCoracao() {
-    const coracao = document.createElement("div");
-    coracao.classList.add("coracao");
-    coracao.innerHTML = "💖";
-
-    coracao.style.left = Math.random() * window.innerWidth + "px";
-    coracao.style.top = Math.random() * window.innerHeight + "px";
-
-    document.body.appendChild(coracao);
-
-    setTimeout(() => {
-        coracao.remove();
-    }, 2000);
+function clicouSim() {
+    document.getElementById("yesScreen").style.display = "flex";
 }
+
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseenter", () => {
+    noBtn.style.transform =
+        `translate(${Math.random()*200-100}px,${Math.random()*100-50}px)`;
+});
+
+const contador = document.getElementById("contador");
+const inicio = new Date("2022-08-16T00:00:00");
+
+function atualizarContador() {
+    const agora = new Date();
+    let diff = agora - inicio;
+
+    const dias = Math.floor(diff / (1000*60*60*24));
+    diff -= dias * (1000*60*60*24);
+
+    const horas = Math.floor(diff / (1000*60*60));
+    diff -= horas * (1000*60*60);
+
+    const minutos = Math.floor(diff / (1000*60));
+    diff -= minutos * (1000*60);
+
+    const segundos = Math.floor(diff / 1000);
+
+    contador.textContent =
+        `O meu amor por ti começou há: ${dias} dias ${horas}h ${minutos}m ${segundos}s`;
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
 </script>
 
 </body>
